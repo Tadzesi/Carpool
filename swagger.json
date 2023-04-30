@@ -1,0 +1,1619 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+    "title": "Infobip - Carpool API",
+    "description": "OpenAPI documentation for Carpool demo project as a C# developing skill presentation",
+    "contact": {
+    "name": "Martin Horný",
+    "email": "martin.horny74@gmail.com"
+    },
+    "license": {
+    "name": "Licenced under MIT license",
+    "url": "http://opensource.org/licenses/mit-license.php"
+    },
+    "version": "1.0",
+    "x-logo": {
+    "url": "../swagger/vissim-logo.jpg"
+    }
+    },
+    "paths": {
+    "/api/v1/cars/available": {
+    "get": {
+    "tags": [
+    "Cars"
+    ],
+    "summary": "List available cars defined by start and end date",
+    "operationId": "get-cars-availabe",
+    "parameters": [
+    {
+    "name": "StartDate",
+    "in": "query",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "format": "date-time"
+    }
+    },
+    {
+    "name": "EndDate",
+    "in": "query",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "format": "date-time"
+    }
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "type": "array",
+    "items": {
+    "$ref": "#/components/schemas/CarDto"
+    }
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/api/v1/cars": {
+    "get": {
+    "tags": [
+    "Cars"
+    ],
+    "summary": "List all cars stored in the database",
+    "operationId": "get-cars",
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "type": "array",
+    "items": {
+    "$ref": "#/components/schemas/CarDto"
+    }
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    },
+    "post": {
+    "tags": [
+    "Cars"
+    ],
+    "summary": "Update Car",
+    "operationId": "update-car",
+    "requestBody": {
+    "description": "",
+    "content": {
+    "application/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateCarModel"
+    }
+    ]
+    }
+    },
+    "text/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateCarModel"
+    }
+    ]
+    }
+    },
+    "application/*+json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateCarModel"
+    }
+    ]
+    }
+    }
+    }
+    },
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/CarDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/api/v1/cars/{carId}": {
+    "delete": {
+    "tags": [
+    "Cars"
+    ],
+    "summary": "Removed car defined by carId",
+    "operationId": "delete-car",
+    "parameters": [
+    {
+    "name": "carId",
+    "in": "path",
+    "description": "",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/CarDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/api/v1/car-types": {
+    "get": {
+    "tags": [
+    "CarTypes"
+    ],
+    "summary": "List all car types stored in the database",
+    "operationId": "get-car-types",
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "type": "array",
+    "items": {
+    "$ref": "#/components/schemas/CarTypeDto"
+    }
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    },
+    "post": {
+    "tags": [
+    "CarTypes"
+    ],
+    "summary": "Update car type",
+    "operationId": "update-car-type",
+    "requestBody": {
+    "description": "",
+    "content": {
+    "application/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateCarTypeModel"
+    }
+    ]
+    }
+    },
+    "text/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateCarTypeModel"
+    }
+    ]
+    }
+    },
+    "application/*+json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateCarTypeModel"
+    }
+    ]
+    }
+    }
+    }
+    },
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/CarTypeDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/api/v1/car-types/{carTypeId}": {
+    "delete": {
+    "tags": [
+    "CarTypes"
+    ],
+    "summary": "Removed car type defined by carID",
+    "operationId": "delete-car-type",
+    "parameters": [
+    {
+    "name": "carTypeId",
+    "in": "path",
+    "description": "",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/CarTypeDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/api/v1/employees": {
+    "get": {
+    "tags": [
+    "Employees"
+    ],
+    "summary": "List all employees stored in the database",
+    "operationId": "get-employees",
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "type": "array",
+    "items": {
+    "$ref": "#/components/schemas/EmployeeDto"
+    }
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    },
+    "post": {
+    "tags": [
+    "Employees"
+    ],
+    "summary": "Update employee",
+    "operationId": "update-employee",
+    "requestBody": {
+    "description": "",
+    "content": {
+    "application/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateEmployeeModel"
+    }
+    ]
+    }
+    },
+    "text/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateEmployeeModel"
+    }
+    ]
+    }
+    },
+    "application/*+json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateEmployeeModel"
+    }
+    ]
+    }
+    }
+    }
+    },
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/EmployeeDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/api/v1/employees/{employeeId}": {
+    "delete": {
+    "tags": [
+    "Employees"
+    ],
+    "summary": "Removed emloyee defined by employeeId",
+    "operationId": "delete-employee",
+    "parameters": [
+    {
+    "name": "employeeId",
+    "in": "path",
+    "description": "",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/CarDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/api/v1/rides": {
+    "get": {
+    "tags": [
+    "Rides"
+    ],
+    "summary": "List all rides stored in the database",
+    "operationId": "get-rides",
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "type": "array",
+    "items": {
+    "$ref": "#/components/schemas/RideDto"
+    }
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    },
+    "put": {
+    "tags": [
+    "Rides"
+    ],
+    "summary": "Update ride",
+    "operationId": "update-ride",
+    "requestBody": {
+    "description": "",
+    "content": {
+    "application/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateRideModel"
+    }
+    ]
+    }
+    },
+    "text/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateRideModel"
+    }
+    ]
+    }
+    },
+    "application/*+json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdateRideModel"
+    }
+    ]
+    }
+    }
+    }
+    },
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/RideDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    },
+    "post": {
+    "tags": [
+    "Rides"
+    ],
+    "summary": "Create ride",
+    "operationId": "create-ride",
+    "requestBody": {
+    "description": "",
+    "content": {
+    "application/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/CreateRideModel"
+    }
+    ]
+    }
+    },
+    "text/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/CreateRideModel"
+    }
+    ]
+    }
+    },
+    "application/*+json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/CreateRideModel"
+    }
+    ]
+    }
+    }
+    }
+    },
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/RideDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/api/v1/rides/{rideId}": {
+    "delete": {
+    "tags": [
+    "Rides"
+    ],
+    "summary": "Remove ride defined by rideId",
+    "operationId": "delete-ride",
+    "parameters": [
+    {
+    "name": "rideId",
+    "in": "path",
+    "description": "",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/RideDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/api/v1/rides/plan": {
+    "put": {
+    "tags": [
+    "Rides"
+    ],
+    "summary": "Update plan",
+    "operationId": "update-plan-ride",
+    "requestBody": {
+    "description": "",
+    "content": {
+    "application/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdatePlanModel"
+    }
+    ]
+    }
+    },
+    "text/json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdatePlanModel"
+    }
+    ]
+    }
+    },
+    "application/*+json": {
+    "schema": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/UpdatePlanModel"
+    }
+    ]
+    }
+    }
+    }
+    },
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/RideDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "/api/v1/rides/employee/{employeeId}/{rideId}": {
+    "delete": {
+    "tags": [
+    "Rides"
+    ],
+    "summary": "Remove employee from plan defined by rideId and planId",
+    "operationId": "delete-employee-ride",
+    "parameters": [
+    {
+    "name": "employeeId",
+    "in": "path",
+    "description": "",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    },
+    {
+    "name": "rideId",
+    "in": "path",
+    "description": "",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/RideDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    },
+    "post": {
+    "tags": [
+    "Rides"
+    ],
+    "summary": "Add employee to ride",
+    "operationId": "add-employee-ride",
+    "parameters": [
+    {
+    "name": "employeeId",
+    "in": "path",
+    "description": "",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    },
+    {
+    "name": "rideId",
+    "in": "path",
+    "description": "",
+    "required": true,
+    "schema": {
+    "type": "string",
+    "format": "uuid"
+    }
+    }
+    ],
+    "responses": {
+    "200": {
+    "description": "Success",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/RideDto"
+    }
+    }
+    }
+    },
+    "400": {
+    "description": "Bad Request",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse400"
+    }
+    }
+    }
+    },
+    "404": {
+    "description": "Not Found",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse404"
+    }
+    }
+    }
+    },
+    "422": {
+    "description": "Client Error",
+    "content": {
+    "application/json": {
+    "schema": {
+    "$ref": "#/components/schemas/ErrorResponse422"
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    },
+    "components": {
+    "schemas": {
+    "CarDto": {
+    "type": "object",
+    "properties": {
+    "CarId": {
+    "type": "string",
+    "format": "uuid",
+    "nullable": true
+    },
+    "Name": {
+    "type": "string",
+    "nullable": true
+    },
+    "Plate": {
+    "type": "string",
+    "nullable": true
+    },
+    "CarType": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/CarTypeDto"
+    }
+    ],
+    "nullable": true
+    },
+    "Color": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/ColorDto"
+    }
+    ],
+    "nullable": true
+    }
+    },
+    "additionalProperties": false
+    },
+    "CarTypeDto": {
+    "required": [
+    "CarTypeId"
+    ],
+    "type": "object",
+    "properties": {
+    "CarTypeId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    "Name": {
+    "type": "string",
+    "nullable": true
+    },
+    "Description": {
+    "type": "string",
+    "nullable": true
+    }
+    },
+    "additionalProperties": false
+    },
+    "ColorDto": {
+    "required": [
+    "ColorId"
+    ],
+    "type": "object",
+    "properties": {
+    "ColorId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    "Name": {
+    "type": "string",
+    "nullable": true
+    },
+    "Description": {
+    "type": "string",
+    "nullable": true
+    },
+    "Hex": {
+    "type": "string",
+    "nullable": true
+    }
+    },
+    "additionalProperties": false
+    },
+    "CreateRideModel": {
+    "type": "object",
+    "properties": {
+    "Name": {
+    "type": "string",
+    "nullable": true
+    },
+    "CarId": {
+    "type": "string",
+    "format": "uuid",
+    "nullable": true
+    },
+    "RidePlan": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/RidePlanDto"
+    }
+    ],
+    "nullable": true
+    }
+    },
+    "additionalProperties": false
+    },
+    "DateTimePickerPeriodQuery": {
+    "required": [
+    "EndDate",
+    "StartDate"
+    ],
+    "type": "object",
+    "properties": {
+    "StartDate": {
+    "type": "string",
+    "format": "date-time"
+    },
+    "EndDate": {
+    "type": "string",
+    "format": "date-time"
+    }
+    },
+    "additionalProperties": false
+    },
+    "EmployeeDto": {
+    "type": "object",
+    "properties": {
+    "EmployeeId": {
+    "type": "string",
+    "format": "uuid",
+    "nullable": true
+    },
+    "FirstName": {
+    "type": "string",
+    "nullable": true
+    },
+    "LastName": {
+    "type": "string",
+    "nullable": true
+    },
+    "IsDriver": {
+    "type": "boolean",
+    "nullable": true
+    }
+    },
+    "additionalProperties": false
+    },
+    "ErrorResponse": {
+    "type": "object",
+    "properties": {
+    "Status": {
+    "maximum": 600,
+    "minimum": 100,
+    "type": "integer",
+    "description": "The HTTP Status code that was sent with this error message",
+    "format": "int32"
+    },
+    "ErrorCode": {
+    "type": "string",
+    "description": "Internal error code",
+    "nullable": true
+    },
+    "Message": {
+    "type": "string",
+    "description": "Optional basic feedback message in your language",
+    "nullable": true
+    },
+    "Link": {
+    "type": "string",
+    "description": "Optional hyperlink to documentation about this error",
+    "nullable": true
+    },
+    "DeveloperMessage": {
+    "type": "string",
+    "description": "Optional more technical error message",
+    "nullable": true
+    },
+    "ValidationMessages": {
+    "type": "array",
+    "items": {
+    "$ref": "#/components/schemas/ValidationMessage"
+    },
+    "description": "An optional list of validation messages",
+    "nullable": true
+    },
+    "CorrelationId": {
+    "type": "string",
+    "description": "A UUID that contains a correlationId which can be used to correlate multiple errors and link this error to entries in (other) logs.",
+    "nullable": true
+    }
+    },
+    "additionalProperties": false,
+    "description": "Generic format for an error message"
+    },
+    "ErrorResponse400": {
+    "type": "object",
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/ErrorResponse"
+    }
+    ],
+    "additionalProperties": false,
+    "description": "Error response with 400 status code"
+    },
+    "ErrorResponse404": {
+    "type": "object",
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/ErrorResponse"
+    }
+    ],
+    "additionalProperties": false,
+    "description": "Error response with 404 status code"
+    },
+    "ErrorResponse409": {
+    "type": "object",
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/ErrorResponse"
+    }
+    ],
+    "additionalProperties": false,
+    "description": "Error response with 409 status code"
+    },
+    "ErrorResponse422": {
+    "type": "object",
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/ErrorResponse"
+    }
+    ],
+    "additionalProperties": false,
+    "description": "Error response with 422 status code"
+    },
+    "ErrorResponse500": {
+    "type": "object",
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/ErrorResponse"
+    }
+    ],
+    "additionalProperties": false,
+    "description": "Error response with 500 status code"
+    },
+    "ErrorResponse501": {
+    "type": "object",
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/ErrorResponse"
+    }
+    ],
+    "additionalProperties": false,
+    "description": "Error response with 5001 status code"
+    },
+    "RideDto": {
+    "type": "object",
+    "properties": {
+    "RideId": {
+    "type": "string",
+    "format": "uuid",
+    "nullable": true
+    },
+    "Name": {
+    "type": "string",
+    "nullable": true
+    },
+    "Car": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/CarDto"
+    }
+    ],
+    "nullable": true
+    },
+    "Employees": {
+    "type": "array",
+    "items": {
+    "$ref": "#/components/schemas/EmployeeDto"
+    },
+    "nullable": true
+    },
+    "RidePlan": {
+    "allOf": [
+    {
+    "$ref": "#/components/schemas/RidePlanDto"
+    }
+    ],
+    "nullable": true
+    }
+    },
+    "additionalProperties": false
+    },
+    "RidePlanDto": {
+    "type": "object",
+    "properties": {
+    "RideId": {
+    "type": "string",
+    "format": "uuid",
+    "nullable": true
+    },
+    "StartLocaion": {
+    "type": "string",
+    "nullable": true
+    },
+    "EndLocaion": {
+    "type": "string",
+    "nullable": true
+    },
+    "StartDate": {
+    "type": "string",
+    "format": "date-time",
+    "nullable": true
+    },
+    "EndDate": {
+    "type": "string",
+    "format": "date-time",
+    "nullable": true
+    }
+    },
+    "additionalProperties": false
+    },
+    "UpdateCarModel": {
+    "required": [
+    "CarTypeId",
+    "ColorId",
+    "Name",
+    "Plate"
+    ],
+    "type": "object",
+    "properties": {
+    "CarId": {
+    "type": "string",
+    "format": "uuid",
+    "nullable": true
+    },
+    "Name": {
+    "type": "string"
+    },
+    "Plate": {
+    "type": "string"
+    },
+    "CarTypeId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    "ColorId": {
+    "type": "string",
+    "format": "uuid"
+    }
+    },
+    "additionalProperties": false
+    },
+    "UpdateCarTypeModel": {
+    "required": [
+    "Descritpion",
+    "Name"
+    ],
+    "type": "object",
+    "properties": {
+    "CarTypeId": {
+    "type": "string",
+    "format": "uuid",
+    "nullable": true
+    },
+    "Name": {
+    "type": "string"
+    },
+    "Descritpion": {
+    "type": "string"
+    }
+    },
+    "additionalProperties": false
+    },
+    "UpdateEmployeeModel": {
+    "required": [
+    "EmployeeId",
+    "FirstName",
+    "IsDriver",
+    "LastName"
+    ],
+    "type": "object",
+    "properties": {
+    "EmployeeId": {
+    "type": "string",
+    "format": "uuid"
+    },
+    "FirstName": {
+    "type": "string"
+    },
+    "LastName": {
+    "type": "string"
+    },
+    "IsDriver": {
+    "type": "boolean"
+    }
+    },
+    "additionalProperties": false
+    },
+    "UpdatePlanModel": {
+    "type": "object",
+    "properties": {
+    "RideId": {
+    "type": "string",
+    "format": "uuid",
+    "nullable": true
+    },
+    "StartLocation": {
+    "type": "string",
+    "nullable": true
+    },
+    "EndLocation": {
+    "type": "string",
+    "nullable": true
+    },
+    "StartDate": {
+    "type": "string",
+    "format": "date-time",
+    "nullable": true
+    },
+    "EndDate": {
+    "type": "string",
+    "format": "date-time",
+    "nullable": true
+    }
+    },
+    "additionalProperties": false
+    },
+    "UpdateRideModel": {
+    "type": "object",
+    "properties": {
+    "RideId": {
+    "type": "string",
+    "format": "uuid",
+    "nullable": true
+    },
+    "Name": {
+    "type": "string",
+    "nullable": true
+    },
+    "CarId": {
+    "type": "string",
+    "format": "uuid",
+    "nullable": true
+    }
+    },
+    "additionalProperties": false
+    },
+    "ValidationMessage": {
+    "type": "object",
+    "properties": {
+    "ErrorCode": {
+    "type": "string",
+    "description": "Internal error code for this validation",
+    "nullable": true
+    },
+    "Field": {
+    "type": "string",
+    "description": "The name of the field that failed validation",
+    "nullable": true
+    },
+    "Message": {
+    "type": "string",
+    "description": "Validation message for the field",
+    "nullable": true
+    }
+    },
+    "additionalProperties": false,
+    "description": "Generic format for a validation error, listed in a ValidationMessages array inside an error message."
+    }
+    },
+    "securitySchemes": {
+    "Bearer": {
+    "type": "apiKey",
+    "description": "JWT Authorization header using the Bearer scheme. Example: "Authorization: Bearer {token}"",
+    "name": "Authorization",
+    "in": "header"
+    }
+    }
+    },
+    "security": [
+    {
+    "Bearer": []
+    }
+    ]
+    }
