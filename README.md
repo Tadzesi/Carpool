@@ -40,7 +40,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Web application for visualizing carpool sharing, with the following
 functionalities:
@@ -52,9 +51,9 @@ functionalities:
 
 Here's why:
 * API side is most important, so I focused on this part.
-* Project requirement was prepare full application
+* Project requirement was to prepare I full application with FE (Vue) and BE (.NET API)
 
-Application is not fully working, but this is a great example how API should me propperly writen.
+Application is not fully working, but this is a example how API should be properly writen and tested by xUnit.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -74,7 +73,7 @@ Application is not fully working, but this is a great example how API should me 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-For properly running applicaion is needed to instal Microsoft SQL Express or Microsoft SQL. Also Visual studio 2022 is recomended, or code is able to run in Studio Code
+For properly running applicaion is needed to instal Microsoft SQL Express or Microsoft SQL. Also Visual studio 2022 is recomended. Code is able to run in Studio Code
 
 
 ### Installation
@@ -82,7 +81,7 @@ For properly running applicaion is needed to instal Microsoft SQL Express or Mic
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/Tadzesi/Carpool.git 
    ```
 2. Open project in Visual studio 2022
    
